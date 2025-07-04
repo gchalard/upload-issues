@@ -18,6 +18,10 @@ inputs:
     required: false
     description: |
       The API URL of the GitHub server hosting the repository
+  labels:
+    required: false
+    description: |
+      The list of labels used to identify issues to compare with in a commat separated list
 runs:
   using: docker
   image: Dockerfile
@@ -26,3 +30,4 @@ runs:
     - --token=${{ inputs.token }}
     - --repo=${{ inputs.repository }}
     - --api-url=${{ inputs.api-url }}
+    - --labels=${{ inputs.labels }}
