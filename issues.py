@@ -61,7 +61,7 @@ def get_current_issues(token: str, repo: str, url: str, labels: List[str])->List
 
 def _in_(issue: Dict[str,str], issues: List[Dict[str,str]])->bool:
     def _eq_(a:Dict[str,str], b: Dict[str,str])->bool:
-        return { "title": a["title"], "body": a["body"], "labels": a["labels"] } == { "title": b["title"], "body": b["body"], "labels": b["labels"] }
+        return { "title": a["title"], "body": a["body"], "labels": sorted(a["labels"]) } == { "title": b["title"], "body": b["body"], "labels": sorted(b["labels"]) }
     res = False
 
     for issue_ in issues:
