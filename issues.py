@@ -164,9 +164,11 @@ def cli()->None:
     parser.add_argument("--token", required=True, help="The github token")
     parser.add_argument("--repo", required=False, help="The github repo, e.g org/repo")
     parser.add_argument("--api-url", required=False, help="The url of the API")
-    parser.add_argument("--labels", required=False, nargs="+", help="The list of labels to use for comparison, space separated format, e.g security sast bandit")
+    parser.add_argument("--labels", required=False, type=lambda labels: labels.split(" "), help="The list of labels to use for comparison, space separated format, e.g 'security sast bandit'")
 
     args = parser.parse_args()
+
+    print(args.labels)
     main(
         report_path = args.report,
         token=args.token,
