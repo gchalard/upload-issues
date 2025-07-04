@@ -1,0 +1,28 @@
+name: Upload GitHub Issues
+author: Guilhem CHALARD PERENNOU
+description: A GitHub Action to Upload GitHub Issues from a well formatted json file
+inputs:
+  report:
+    required: true
+    description: |
+      The path to the well formatted JSON file
+  token:
+    required: true
+    description: |
+      The GitHub token with the necessary permissions (issues: write)
+  repository:
+    required: false
+    description: | 
+      The GitHub repository to report the issues to, e.g gchalard/upload-issues
+  api-url: 
+    required: false
+    description: |
+      The API URL of the GitHub server hosting the repository
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - --report=${{ inputs.report }}
+    - --token=${{ inputs.token }}
+    - --repo=${{ inputs.repository }}
+    - --api-url={{ inputs.api-url }}
