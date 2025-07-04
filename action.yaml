@@ -22,6 +22,7 @@ inputs:
     required: false
     description: |
       The list of labels used to identify issues to compare with in a commat separated list
+    default: "nolabel"
 runs:
   using: docker
   image: Dockerfile
