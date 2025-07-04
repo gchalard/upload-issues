@@ -6,4 +6,4 @@ COPY issues.py /app/
 
 RUN pip install requests
 
-ENTRYPOINT [ "python3", "issues.py" ]
+ENTRYPOINT [ "python3", "/app/issues.py" ]
