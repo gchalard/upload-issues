@@ -25,4 +25,4 @@ runs:
     - --report=${{ inputs.report }}
     - --token=${{ inputs.token }}
     - --repo=${{ inputs.repository }}
-    - --api-url={{ inputs.api-url }}
+    - --api-url=${{ inputs.api-url }}
