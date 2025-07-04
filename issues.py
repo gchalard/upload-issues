@@ -129,9 +129,11 @@ def close_issue(issue: Dict[str, str], token: str, repo: str, url: str):
         print("Successfully closed the issue")
 
 
-def main(report_path: Path, token: str, repo: str = None, url: str = None)->None:
+def main(report_path: Path, token: str, repo: str = None, url: str = None, labels = list())->None:
     potential_issues = get_issues(report_path=report_path)
-    current_issues = get_current_issues(token=token,repo=repo,url=url,labels=["security"])
+
+    labels = labels if not labels == list() else ["nolabels"]
+    current_issues = get_current_issues(token=token,repo=repo,url=url,labels=labels)
 
     issues = compare_issues(current=current_issues, new=potential_issues)
 
@@ -162,13 +164,15 @@ def cli()->None:
     parser.add_argument("--token", required=True, help="The github token")
     parser.add_argument("--repo", required=False, help="The github repo, e.g org/repo")
     parser.add_argument("--api-url", required=False, help="The url of the API")
+    parser.add_argument("--labels", required=False, nargs="+", help="The list of labels to use for comparison, space separated format, e.g security sast bandit")
 
     args = parser.parse_args()
     main(
         report_path = args.report,
         token=args.token,
         repo=args.repo,
-        url=args.api_url
+        url=args.api_url,
+        labels=args.labels
     )
 
 if __name__ == "__main__":
